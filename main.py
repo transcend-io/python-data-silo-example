@@ -76,7 +76,7 @@ def get_core_identifier(headers):
         decoded = jwt.decode(
             bytes(token, 'utf-8'),
             get_transcend_public_key(),
-            algorithm=['ES384'],
+            algorithms=['ES384'],
             audience=JWT_AUDIENCE,
             verify=VERIFY_JWT,  # Only validate in prod where the tokens are real
         )

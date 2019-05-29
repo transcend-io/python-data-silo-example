@@ -22,16 +22,17 @@ from jwt.exceptions import InvalidKeyError
 TRANSCEND_API_KEY = 'd9e294c4d88e6a9e3c373f272475c6158bd392050c6600b1be701646888c4c6d'
 
 # The API to use with the sombra instance that encrypts the data before hitting Transcends servers THIS IS A SECRET, STORE SAFELY AND CYCLE REGULARLY
-SOMBRA_API_KEY = 'BQYZ14ZGCFGSJNKH7Y67BQYZ14ZGCFGSJNKH7Y67/I='
+SOMBRA_API_KEY = 'jC1VbtN9eQ3r+eQHVK9UVILPQn76GOW65HrVUsBYl/I='
 
-# The url of the sombra public key that signs core identifiers
-SOMBRA_PUBLIC_KEY_URL = 'https://acme.sombra.transcend.io/public-keys/sombra-general-signing-key'
+# The url of the sombra instance
+# SOMBRA_URL = 'https://patreon.sombra.transcend.io'
+SOMBRA_URL = 'https://localhost:5040'
 
 # The url to respond to webhooks with
-TRANSCEND_WEBHOOK_URL = 'https://acme.sombra.transcend.io/v1/data-silo'
+TRANSCEND_WEBHOOK_URL = SOMBRA_URL + '/v1/data-silo'
 
 # The JWT audience
-JWT_AUDIENCE="acme"
+JWT_AUDIENCE="patreon"
 
 # Whether to verify the JWT from Transcend, set to False to trust the JWT always
 VERIFY_JWT = True
@@ -60,7 +61,7 @@ IS_A_FRAUD = {
 Get the sombra public key, used to verify the coreIdentifier
 """
 def get_transcend_public_key():
-    res = requests.get(SOMBRA_PUBLIC_KEY_URL, verify = not TRUST_SELF_SIGNED_CERT)
+    res = requests.get(SOMBRA_URL + '/public-keys/sombra-general-signing-key', verify = not TRUST_SELF_SIGNED_CERT)
     return res.content
 
 """
@@ -109,7 +110,7 @@ def perform_access(user, headers):
     }
     print(outgoing_request_body)
     requests.post(
-        TRANSCEND_WEBHOOK_URL,
+        SOMBRA_URL + '/v1/data-silo',
         json=outgoing_request_body,
         headers=headers,
         verify=not TRUST_SELF_SIGNED_CERT

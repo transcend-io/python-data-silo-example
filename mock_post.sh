@@ -6,7 +6,6 @@ set -e
 #
 # Usage:
 # ./mock_post.sh
-# ./mock_post.sh
 ###############################################################################
 
 curl --request POST https://localhost:4443 \

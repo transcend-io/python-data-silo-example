@@ -25,7 +25,8 @@ TRANSCEND_API_KEY = '4ff241e61c60288babed50097aab17eb38d97face63ac06923da85345f8
 SOMBRA_API_KEY = 'jC1VbtN9eQ3r+eQHVK9UVILPQn76GOW65HrVUsBYl/I='
 
 # The url of the sombra instance
-SOMBRA_URL = 'https://patreon.sombra.transcend.io'
+# SOMBRA_URL = 'https://patreon.sombra.transcend.io'
+SOMBRA_URL = 'https://patreon.sombra.dev.transcen.dental'
 # SOMBRA_URL = 'https://localhost:5040'
 
 # The url to respond to webhooks with
@@ -175,9 +176,6 @@ class SimpleHTTPRequestHandler(BaseHTTPRequestHandler):
 
         # Verify that the request came from Transcend
         coreIdentifier = get_core_identifier(self.headers)
-
-        print(self.headers)
-        print(body)
 
         # Determine whether the request should be blocked
         status = 'COMPILING'

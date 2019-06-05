@@ -19,14 +19,14 @@ from jwt.exceptions import InvalidKeyError
 #################
 
 # The API to post to Transcend THIS IS A SECRET, STORE SAFELY AND CYCLE REGULARLY
-TRANSCEND_API_KEY = 'd9e294c4d88e6a9e3c373f272475c6158bd392050c6600b1be701646888c4c6d'
+TRANSCEND_API_KEY = '4ff241e61c60288babed50097aab17eb38d97face63ac06923da85345f8ce559'
 
 # The API to use with the sombra instance that encrypts the data before hitting Transcends servers THIS IS A SECRET, STORE SAFELY AND CYCLE REGULARLY
 SOMBRA_API_KEY = 'jC1VbtN9eQ3r+eQHVK9UVILPQn76GOW65HrVUsBYl/I='
 
 # The url of the sombra instance
-# SOMBRA_URL = 'https://patreon.sombra.transcend.io'
-SOMBRA_URL = 'https://localhost:5040'
+SOMBRA_URL = 'https://patreon.sombra.transcend.io'
+# SOMBRA_URL = 'https://localhost:5040'
 
 # The url to respond to webhooks with
 TRANSCEND_WEBHOOK_URL = SOMBRA_URL + '/v1/data-silo'
@@ -38,7 +38,7 @@ JWT_AUDIENCE="patreon"
 VERIFY_JWT = True
 
 # Whether to trust self signed certs
-TRUST_SELF_SIGNED_CERT = True
+TRUST_SELF_SIGNED_CERT = False
 
 # Some test data
 MOCK_DATA = {
@@ -175,6 +175,9 @@ class SimpleHTTPRequestHandler(BaseHTTPRequestHandler):
 
         # Verify that the request came from Transcend
         coreIdentifier = get_core_identifier(self.headers)
+
+        print(self.headers)
+        print(body)
 
         # Determine whether the request should be blocked
         status = 'COMPILING'
